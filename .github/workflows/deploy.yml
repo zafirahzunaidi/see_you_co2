@@ -51,6 +51,7 @@ jobs:
           sam deploy \
             --template-file .aws-sam/build/template.yaml \
             --stack-name ${{ env.STACK_NAME }} \
+            --s3-bucket ${{ secrets.SAM_DEPLOY_BUCKET }} \
             --capabilities CAPABILITY_IAM \
             --region ${{ env.AWS_REGION }} \
             --parameter-overrides Environment=${{ env.ENVIRONMENT }} \
