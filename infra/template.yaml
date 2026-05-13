@@ -1,0 +1,100 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: See You CO2 - AI Sustainability Dashboard
+
+Globals:
+  Function:
+    Timeout: 30
+    Runtime: python3.12
+    MemorySize: 256
+
+Parameters:
+  Environment:
+    Type: String
+    Default: prod
+    AllowedValues:
+      - dev
+      - staging
+      - prod
+
+Resources:
+  # S3 Bucket for frontend hosting
+  FrontendBucket:
+    Type: AWS::S3::Bucket
+    Properties:
+      BucketName: !Sub 'see-you-co2-frontend-${Environment}'
+      WebsiteConfiguration:
+        IndexDocument: index.html
+        ErrorDocument: index.html
+      PublicAccessBlockConfiguration:
+        BlockPublicAcls: false
+        BlockPublicPolicy: false
+        IgnorePublicAcls: false
+        RestrictPublicBuckets: false
+
+  FrontendBucketPolicy:
+    Type: AWS::S3::BucketPolicy
+    Properties:
+      Bucket: !Ref FrontendBucket
+      PolicyDocument:
+        Statement:
+          - Sid: PublicReadGetObject
+            Effect: Allow
+            Principal: '*'
+            Action: s3:GetObject
+            Resource: !Sub '${FrontendBucket.Arn}/*'
+
+  # Lambda Function
+  SeeYouCO2Function:
+    Type: AWS::Serverless::Function
+    Properties:
+      FunctionName: !Sub 'see-you-co2-api-${Environment}'
+      CodeUri: ../backend/lambda/
+      Handler: app.lambda_handler
+      Description: API handler for See You CO2 dashboard
+      Environment:
+        Variables:
+          ENVIRONMENT: !Ref Environment
+      Events:
+        ApiHealth:
+          Type: Api
+          Properties:
+            Path: /api/health
+            Method: GET
+            RestApiId: !Ref ApiGateway
+        ApiCalculate:
+          Type: Api
+          Properties:
+            Path: /api/calculate
+            Method: POST
+            RestApiId: !Ref ApiGateway
+        ApiOptions:
+          Type: Api
+          Properties:
+            Path: /api/{proxy+}
+            Method: OPTIONS
+            RestApiId: !Ref ApiGateway
+
+  # API Gateway
+  ApiGateway:
+    Type: AWS::Serverless::Api
+    Properties:
+      Name: !Sub 'see-you-co2-api-${Environment}'
+      StageName: !Ref Environment
+      Cors:
+        AllowMethods: "'GET,POST,OPTIONS'"
+        AllowHeaders: "'Content-Type'"
+        AllowOrigin: "'*'"
+
+Outputs:
+  FrontendURL:
+    Description: Frontend S3 Website URL
+    Value: !GetAtt FrontendBucket.WebsiteURL
+
+  ApiURL:
+    Description: API Gateway endpoint URL
+    Value: !Sub 'https://${ApiGateway}.execute-api.${AWS::Region}.amazonaws.com/${Environment}/'
+
+  FrontendBucketName:
+    Description: S3 bucket name for frontend deployment
+    Value: !Ref FrontendBucket

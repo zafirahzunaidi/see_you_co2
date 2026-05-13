@@ -1,0 +1,108 @@
+name: Deploy See You CO2
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+env:
+  AWS_REGION: ap-southeast-1
+  SAM_TEMPLATE: infra/template.yaml
+  STACK_NAME: see-you-co2-stack
+  ENVIRONMENT: prod
+
+jobs:
+  deploy-backend:
+    name: Deploy Backend (Lambda + API Gateway)
+    runs-on: ubuntu-latest
+    permissions:
+      id-token: write
+      contents: read
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install dependencies
+        run: |
+          pip install -r backend/lambda/requirements.txt
+
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ${{ env.AWS_REGION }}
+
+      - name: Set up SAM CLI
+        uses: aws-actions/setup-sam@v2
+
+      - name: SAM Build
+        run: sam build --template-file ${{ env.SAM_TEMPLATE }}
+
+      - name: SAM Deploy
+        run: |
+          sam deploy \
+            --template-file .aws-sam/build/template.yaml \
+            --stack-name ${{ env.STACK_NAME }} \
+            --capabilities CAPABILITY_IAM \
+            --region ${{ env.AWS_REGION }} \
+            --parameter-overrides Environment=${{ env.ENVIRONMENT }} \
+            --no-confirm-changeset \
+            --no-fail-on-empty-changeset
+
+      - name: Get stack outputs
+        id: stack-outputs
+        run: |
+          FRONTEND_BUCKET=$(aws cloudformation describe-stacks \
+            --stack-name ${{ env.STACK_NAME }} \
+            --query "Stacks[0].Outputs[?OutputKey=='FrontendBucketName'].OutputValue" \
+            --output text)
+          echo "frontend_bucket=$FRONTEND_BUCKET" >> $GITHUB_OUTPUT
+
+          API_URL=$(aws cloudformation describe-stacks \
+            --stack-name ${{ env.STACK_NAME }} \
+            --query "Stacks[0].Outputs[?OutputKey=='ApiURL'].OutputValue" \
+            --output text)
+          echo "api_url=$API_URL" >> $GITHUB_OUTPUT
+
+    outputs:
+      frontend_bucket: ${{ steps.stack-outputs.outputs.frontend_bucket }}
+      api_url: ${{ steps.stack-outputs.outputs.api_url }}
+
+  deploy-frontend:
+    name: Deploy Frontend (S3)
+    runs-on: ubuntu-latest
+    needs: deploy-backend
+    permissions:
+      id-token: write
+      contents: read
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ${{ env.AWS_REGION }}
+
+      - name: Deploy frontend to S3
+        run: |
+          aws s3 sync frontend/ s3://${{ needs.deploy-backend.outputs.frontend_bucket }} \
+            --delete \
+            --cache-control "public, max-age=3600"
+
+      - name: Output deployment URLs
+        run: |
+          echo "✅ Deployment complete!"
+          echo "🌐 Frontend: http://${{ needs.deploy-backend.outputs.frontend_bucket }}.s3-website-${{ env.AWS_REGION }}.amazonaws.com"
+          echo "🔗 API: ${{ needs.deploy-backend.outputs.api_url }}"
