@@ -1,23 +1,150 @@
-﻿# See You CO2 - AI Sustainability Dashboard
+# 🌱 See You CO2
 
-An AI-powered sustainability dashboard for tracking and calculating CO2 emissions.
+### Turning everyday habits into climate action.
 
-## Project Structure
+🏆 **3rd Place Overall — AWS Great AI Hackathon 2025**  
+🌍 **1st Place — Sustainability & Environment Domain**
 
+See You CO2 is an AI-powered sustainability companion designed to help users understand, visualize, and reduce their carbon footprint through personalized AI insights, gamification, and environmental simulations.
+
+
+
+## 🚨 Problem
+
+Many sustainability tools today are:
+
+- Too technical
+- Too generic
+- Disconnected from daily lifestyle habits
+
+Users are often shown carbon numbers without understanding what actions to take next.
+
+See You CO2 transforms carbon awareness into a more personalized, interactive, and actionable experience.
+
+
+
+## ✨ Key Features
+
+- 🌍 Carbon footprint calculator
+- 📊 Emission breakdown dashboard
+- 🤖 AI-powered sustainability chatbot
+- 🎮 Gamified Eco Quest Mode
+- 🔮 What-if lifestyle simulation
+- 📄 Personalized sustainability report
+- 🌱 Environmental impact visualization
+
+
+
+## 📸 Preview
+
+### Dashboard
+![Dashboard](images/dashboard.png)
+
+### Eco Quest Mode
+![Quest](images/quest.png)
+
+### AI Chatbot
+![Chatbot](images/chatbot.png)
+
+
+
+## 🧠 AI Integration
+
+See You CO2 uses **Amazon Bedrock** with **Amazon Nova Lite** to generate:
+
+- Personalized sustainability insights
+- AI chatbot responses
+- Eco missions and challenges
+- Sustainability coaching
+- Personalized sustainability reports
+
+To improve reliability, carbon calculations are handled separately using deterministic rule-based logic in AWS Lambda.
+
+
+
+## ☁️ AWS Architecture
+
+```text
+User Input
+   ↓
+Frontend (Kiro)
+   ↓
+API Gateway
+   ↓
+AWS Lambda
+   ↓
+Amazon Bedrock (Nova Lite)
+   ↓
+AI-generated sustainability response
+   ↓
+Frontend dashboard & chatbot
 ```
-see_you_co2/
-├── frontend/
-│   └── index.html          # Main dashboard UI
-├── backend/
-│   └── lambda/
-│       ├── app.py           # Lambda function handler
-│       └── requirements.txt # Python dependencies
-├── infra/
-│   └── template.yaml       # AWS SAM template (Lambda + API Gateway + S3)
-└── .github/
-    └── workflows/
-        └── deploy.yml      # CI/CD pipeline
-```
+
+## AWS Services Used
+- Amazon Bedrock — Generative AI responses
+- Amazon Nova Lite — Lightweight AI model
+- AWS Lambda — Backend processing and carbon calculation
+- API Gateway — API routing
+- S3 Bucket — Frontend hosting
+- GitHub Actions — CI/CD deployment pipeline
+
+
+
+## 🛠️ Technologies Used
+
+### Frontend
+- HTML
+- CSS
+- JavaScript
+- Kiro
+
+### Backend & Cloud
+- AWS Lambda
+- API Gateway
+- Amazon Bedrock
+- Amazon Nova Lite
+
+### AI & Sustainability
+- Prompt Engineering
+- Carbon Emission Logic
+- Gamification Design
+
+## 🔮 Future Improvements
+
+- User history tracking with DynamoDB
+- Real-time sustainability analytics
+- Bahasa Malaysia support
+- Voice-based AI assistant
+- Community eco challenges
+- Mobile app version
+
+
+## 🎥 Demo Video
+
+[Watch Demo on YouTube](https://youtu.be/wWcaNTir1XI)
+
+
+## 🔮 Future Improvements
+
+- User history tracking with DynamoDB
+- Real-time sustainability analytics
+- Bahasa Malaysia support
+- Voice-based AI assistant
+- Community eco challenges
+- Mobile app version
+
+## 👥 Team Whoopie
+
+Built during AWS Great AI Hackathon 2025.
+
+Team Members:
+- [@zafirahzunaidi](https://github.com)
+- [@ainadalilirafix](https://github.com)
+- [@nurunnajihah](https://github.com)
+- Nur Qistina
+- Balqis Syawina
+
+---
 
 ## Deployment
 
