@@ -140,7 +140,7 @@ Frontend dashboard & chatbot
 Built during AWS Cendekiawan 2026.
 
 Team Members:
-- [@zafirahzunaidi]([https://github.com](https://github.com/zafirahzunaidi))
+- [@zafirahzunaidi]([https://github.com/zafirahzunaidi])
 - [@ainadalilirafix]([https://github.com](https://github.com/ainadalilirafix))
 - [@nurunnajihah]([https://github.com](https://github.com/nurunnajihah26))
 - Nur Qistina
