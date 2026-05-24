@@ -2,7 +2,7 @@
 
 ### Turning everyday habits into climate action.
 
-🏆 **3rd Place Overall — AWS Great AI Hackathon 2025**  
+🏆 **3rd Place Overall — AWS Cendekiawan 2026**  
 🌍 **1st Place — Sustainability & Environment Domain**
 
 See You CO2 is an AI-powered sustainability companion designed to help users understand, visualize, and reduce their carbon footprint through personalized AI insights, gamification, and environmental simulations.
