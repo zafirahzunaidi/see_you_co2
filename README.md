@@ -122,6 +122,7 @@ Frontend dashboard & chatbot
 ## 🎥 Demo Video
 
 [Watch Demo on YouTube](https://youtu.be/wWcaNTir1XI)
+[![Watch Demo](https://img.youtube.com/vi/wWcaNTir1XI/0.jpg)](https://www.youtube.com/watch?v=wWcaNTir1XI)
 
 
 ## 🔮 Future Improvements
@@ -138,9 +139,9 @@ Frontend dashboard & chatbot
 Built during AWS Great AI Hackathon 2025.
 
 Team Members:
-- [@zafirahzunaidi](https://github.com)
-- [@ainadalilirafix](https://github.com)
-- [@nurunnajihah](https://github.com)
+- [@zafirahzunaidi]([https://github.com](https://github.com/zafirahzunaidi))
+- [@ainadalilirafix]([https://github.com](https://github.com/ainadalilirafix))
+- [@nurunnajihah]([https://github.com](https://github.com/nurunnajihah26))
 - Nur Qistina
 - Balqis Syawina
 
