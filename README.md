@@ -137,7 +137,7 @@ Frontend dashboard & chatbot
 
 ## 👥 Team Whoopie
 
-Built during AWS Great AI Hackathon 2025.
+Built during AWS Cendekiawan 2026.
 
 Team Members:
 - [@zafirahzunaidi]([https://github.com](https://github.com/zafirahzunaidi))
