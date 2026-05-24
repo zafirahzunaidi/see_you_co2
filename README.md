@@ -39,12 +39,15 @@ See You CO2 transforms carbon awareness into a more personalized, interactive, a
 
 ### Dashboard
 ![Dashboard](images/dashboard.png)
+<img src="images/dashboard.png" width="700">
 
 ### Eco Quest Mode
 ![Quest](images/quest.png)
+<img src="images/quest.png" width="700">
 
 ### AI Chatbot
 ![Chatbot](images/chatbot.png)
+<img src="images/chatbot.png" width="700">
 
 
 
@@ -120,8 +123,6 @@ Frontend dashboard & chatbot
 
 
 ## 🎥 Demo Video
-
-[Watch Demo on YouTube](https://youtu.be/wWcaNTir1XI)
 [![Watch Demo](https://img.youtube.com/vi/wWcaNTir1XI/0.jpg)](https://www.youtube.com/watch?v=wWcaNTir1XI)
 
 
