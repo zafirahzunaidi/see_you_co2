@@ -1,6 +1,6 @@
 # 🌱 See You CO2
 
-### Turning everyday habits into climate action.
+## Turning everyday habits into climate action.
 
 🏆 **3rd Place Overall — AWS Cendekiawan 2026**  
 🌍 **1st Place — Sustainability & Environment Domain**
