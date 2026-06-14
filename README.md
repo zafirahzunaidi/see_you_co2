@@ -39,11 +39,9 @@ See You CO2 transforms carbon awareness into a more personalized, interactive, a
 
 ### Prototype 
 ![Dashboard](images/Plan.png)
-<img src="images/dashboard.png" width="700">
 
 ### SeeYouCO2 Website
 ![Quest](images/RealWebsite.png)
-<img src="images/quest.png" width="700">
 
 
 
