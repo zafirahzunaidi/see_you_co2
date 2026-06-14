@@ -37,17 +37,13 @@ See You CO2 transforms carbon awareness into a more personalized, interactive, a
 
 ## 📸 Preview
 
-### Dashboard
-![Dashboard](images/dashboard.png)
+### Prototype 
+![Dashboard](images/Plan.png)
 <img src="images/dashboard.png" width="700">
 
-### Eco Quest Mode
-![Quest](images/quest.png)
+### SeeYouCO2 Website
+![Quest](images/RealWebsite.png)
 <img src="images/quest.png" width="700">
-
-### AI Chatbot
-![Chatbot](images/chatbot.png)
-<img src="images/chatbot.png" width="700">
 
 
 
