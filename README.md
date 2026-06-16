@@ -11,7 +11,7 @@ See You CO2 is an AI-powered sustainability companion designed to help users und
 
 ## 🚨 Problem
 
-Many sustainability tools today are:
+Most sustainability tools today are:
 
 - Too technical
 - Too generic
