@@ -2975,10 +2975,55 @@ img,svg{display:block;}
   .chat-layout{grid-template-columns:1fr;}
   .chat-sidebar{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
 }
+/* ── HAMBURGER MENU ── */
+.nav-hamburger{
+  display:none;
+  flex-direction:column;justify-content:center;align-items:center;
+  width:40px;height:40px;gap:5px;
+  background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.1);
+  border-radius:10px;cursor:pointer;flex-shrink:0;
+}
+.nav-hamburger span{
+  display:block;width:20px;height:2px;
+  background:var(--white);border-radius:2px;
+  transition:all 0.25s ease;
+}
+.nav-hamburger.is-open span:nth-child(1){transform:translateY(7px) rotate(45deg);}
+.nav-hamburger.is-open span:nth-child(2){opacity:0;}
+.nav-hamburger.is-open span:nth-child(3){transform:translateY(-7px) rotate(-45deg);}
+
+/* Mobile dropdown */
+.nav-mobile-menu{
+  display:none;
+  position:fixed;top:66px;left:0;right:0;z-index:999;
+  background:rgba(13,17,23,0.97);
+  backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);
+  border-bottom:1px solid rgba(255,255,255,0.08);
+  padding:16px 4% 20px;
+  flex-direction:column;gap:4px;
+}
+.nav-mobile-menu.is-open{display:flex;}
+.nav-mobile-menu a{
+  color:var(--gray);text-decoration:none;font-size:0.95rem;font-weight:500;
+  padding:12px 16px;border-radius:10px;transition:all 0.2s;
+}
+.nav-mobile-menu a:hover,.nav-mobile-menu a.nav-active{
+  background:rgba(16,185,129,0.1);color:var(--white);
+}
+.nav-mobile-cta{
+  margin-top:8px;
+  background:linear-gradient(135deg,var(--green),var(--green-dark));
+  color:var(--white);border:none;padding:13px 16px;border-radius:10px;
+  font-weight:600;font-size:0.95rem;cursor:pointer;
+  font-family:'Inter',sans-serif;text-align:left;
+}
+
 @media(max-width:640px){
   section{padding:64px 4%;}
   nav{padding:0 4%;}
   .nav-links{display:none;}
+  .nav-cta{display:none;}
+  .nav-hamburger{display:flex;}
   .hero-inner{grid-template-columns:1fr;}
   .hero-right{display:none;}
   .hero-stats{flex-direction:column;align-items:stretch;}
@@ -3008,8 +3053,23 @@ img,svg{display:block;}
       <li><a href="#" onclick="showPage('report');return false;" data-page="report">Report</a></li>
     </ul>
     <button class="nav-cta" onclick="showPage('input-section')">Start Tracking</button>
+    <button class="nav-hamburger" id="navHamburger" aria-label="Open menu" onclick="toggleMobileNav()">
+      <span></span><span></span><span></span>
+    </button>
   </div>
 </nav>
+<!-- MOBILE NAV MENU -->
+<div class="nav-mobile-menu" id="navMobileMenu">
+  <a href="#" onclick="showPage('hero');mobileNavClose();return false;" data-page="hero">Home</a>
+  <a href="#" onclick="showPage('input-section');mobileNavClose();return false;" data-page="input-section">Lifestyle</a>
+  <a href="#" onclick="showPage('dashboard');mobileNavClose();return false;" data-page="dashboard">Dashboard</a>
+  <a href="#" onclick="showPage('impact');mobileNavClose();return false;" data-page="impact">Impact</a>
+  <a href="#" onclick="showPage('ecoquest');mobileNavClose();return false;" data-page="ecoquest">Eco Quest</a>
+  <a href="#" onclick="showPage('simulator');mobileNavClose();return false;" data-page="simulator">Simulator</a>
+  <a href="#" onclick="showPage('chat');mobileNavClose();return false;" data-page="chat">AI Chat</a>
+  <a href="#" onclick="showPage('report');mobileNavClose();return false;" data-page="report">Report</a>
+  <button class="nav-mobile-cta" onclick="showPage('input-section');mobileNavClose()">Start Tracking</button>
+</div>
 
 <!-- HERO -->
 <section id="hero" class="page-section">
@@ -6779,6 +6839,19 @@ function showPage(pageId) {
   // Start on home page
   showPage('hero');
 })();
+
+// ===== MOBILE HAMBURGER NAV =====
+function toggleMobileNav() {
+  const menu = document.getElementById('navMobileMenu');
+  const btn  = document.getElementById('navHamburger');
+  const isOpen = menu.classList.toggle('is-open');
+  btn.classList.toggle('is-open', isOpen);
+  btn.setAttribute('aria-label', isOpen ? 'Close menu' : 'Open menu');
+}
+function mobileNavClose() {
+  document.getElementById('navMobileMenu').classList.remove('is-open');
+  document.getElementById('navHamburger').classList.remove('is-open');
+}
 
 // ===== POLISH: SHOW REPORT (enhanced) =====
 // ===== CONTEXTUAL RECOMMENDATION ENGINE =====
