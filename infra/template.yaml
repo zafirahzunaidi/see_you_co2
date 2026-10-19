@@ -60,7 +60,9 @@ Resources:
             - Effect: Allow
               Action:
                 - bedrock:InvokeModel
-              Resource: "arn:aws:bedrock:ap-southeast-1::foundation-model/amazon.nova-lite-v1:0"
+              Resource:
+                - "arn:aws:bedrock:ap-southeast-1::foundation-model/amazon.nova-lite-v1:0"
+                - "arn:aws:bedrock:ap-southeast-1:*:inference-profile/apac.amazon.nova-lite-v1:0"
       Events:
         ApiAI:
           Type: Api

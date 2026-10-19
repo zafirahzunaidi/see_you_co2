@@ -4,7 +4,7 @@ import boto3
 
 # Bedrock client — same region as Lambda (ap-southeast-1)
 bedrock = boto3.client("bedrock-runtime", region_name="ap-southeast-1")
-MODEL_ID = "amazon.nova-lite-v1:0"
+MODEL_ID = "apac.amazon.nova-lite-v1:0"
 
 HEADERS = {
     "Content-Type": "application/json",
