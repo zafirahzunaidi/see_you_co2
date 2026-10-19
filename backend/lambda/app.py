@@ -104,7 +104,7 @@ def generate_report(inputs: dict) -> dict:
     annual = inputs.get("annualTonnes", 0)
     score = inputs.get("ecoScore", 0)
 
-    prompt = f"""You are SemAI, an expert sustainability coach. A user has completed their carbon footprint assessment.
+    prompt = f"""You are CarbonWise AI, an expert sustainability coach for the See You CO2 app. A user has completed their carbon footprint assessment.
 
 User's monthly carbon footprint:
 - Total: {total} kg CO2
@@ -152,7 +152,7 @@ def generate_quest(inputs: dict) -> dict:
     diet_type = inputs.get("dietType", "Mixed Diet")
     score = inputs.get("ecoScore", 0)
 
-    prompt = f"""You are SemAI, a gamified sustainability coach. Generate 3 fun eco quest missions for a user.
+    prompt = f"""You are CarbonWise AI, a gamified sustainability coach for the See You CO2 app. Generate 3 fun eco quest missions for a user.
 
 User profile:
 - Monthly footprint: {total} kg CO2
@@ -221,11 +221,11 @@ def generate_chat(inputs: dict, user_question: str) -> dict:
     if user_question.lower().strip() in greetings:
         return {
             "ai": {
-                "text": f"Hi there! 🌿 I'm SemAI, your personal sustainability coach. I can see your monthly carbon footprint is **{total} kg CO2** with an eco score of **{score}/100**.\n\nAsk me anything about reducing your carbon footprint, your diet, transport choices, or what actions will make the biggest difference for you!"
+                "text": f"Hi there! 🌿 I'm CarbonWise AI, your personal sustainability coach for See You CO2. I can see your monthly carbon footprint is **{total} kg CO2** with an eco score of **{score}/100**.\n\nAsk me anything about reducing your carbon footprint, your diet, transport choices, or what actions will make the biggest difference for you!"
             }
         }
 
-    prompt = f"""You are SemAI, a friendly and knowledgeable sustainability AI coach. You are having a conversation with a user about their carbon footprint and how to live more sustainably.
+    prompt = f"""You are CarbonWise AI, the friendly and knowledgeable sustainability AI coach for the See You CO2 app. You are having a conversation with a user about their carbon footprint and how to live more sustainably.
 
 User's profile:
 - Monthly footprint: {total} kg CO2
