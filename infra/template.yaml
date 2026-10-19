@@ -4,9 +4,9 @@ Description: See You CO2 - AI Sustainability Dashboard
 
 Globals:
   Function:
-    Timeout: 30
+    Timeout: 60
     Runtime: python3.12
-    MemorySize: 256
+    MemorySize: 512
 
 Parameters:
   Environment:
@@ -55,7 +55,25 @@ Resources:
       Environment:
         Variables:
           ENVIRONMENT: !Ref Environment
+      Policies:
+        - Statement:
+            - Effect: Allow
+              Action:
+                - bedrock:InvokeModel
+              Resource: "arn:aws:bedrock:ap-southeast-1::foundation-model/amazon.nova-lite-v1:0"
       Events:
+        ApiAI:
+          Type: Api
+          Properties:
+            Path: /ai
+            Method: POST
+            RestApiId: !Ref ApiGateway
+        ApiAIOptions:
+          Type: Api
+          Properties:
+            Path: /ai
+            Method: OPTIONS
+            RestApiId: !Ref ApiGateway
         ApiHealth:
           Type: Api
           Properties:
@@ -83,7 +101,7 @@ Resources:
       StageName: !Ref Environment
       Cors:
         AllowMethods: "'GET,POST,OPTIONS'"
-        AllowHeaders: "'Content-Type'"
+        AllowHeaders: "'Content-Type,X-Requested-With'"
         AllowOrigin: "'*'"
 
 Outputs:
